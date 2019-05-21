@@ -1,0 +1,36 @@
+<!-- page home : contient le formulaire et la liste des messages reçus -->
+<div ng-controller="homeController" class="d-flex justify-content-center">
+    <section class="w-50">
+        <p class="lead text-center"><i class="fab fa-wpforms mx-2"></i>Formulaire de contact</p>
+        <hr class="w-50">
+        <form name="contact" ng-model='user'>
+            <!-- nom -->
+            <label for="username" class="my-0">Nom:</label>
+            <small ng-show="contact.username.$invalid && !contact.username.$pristine" class="position-absolute ml-1 alert-danger" role="alert"><strong>Attention!</strong> Vérifiez la saisie de votre nom (pas de chiffres).</small>
+            <input id="username" name="username" ng-model="userName" ng-pattern="/[a-zA-ZéèôöîïÔÖÀÉÈÎÏ '-]+([-'\s][a-zA-ZéèôöîïÔÖÀÉÈÎÏ '-][a-zéèôöîï ']+)?$/" type="text" maxlength="50" class="form-control" required placeholder="Votre nom"/>
+            <!-- adresse email -->
+            <label for="email" class="my-0">Email:</label>
+            <small ng-show="contact.email.$invalid && !contact.email.$pristine" class="position-absolute ml-1 alert-danger" role="alert"><strong>Attention!</strong> Vérifiez la saisie de votre email.</small>
+            <input id="email" name="email" ng-model="userMail" ng-pattern="/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/" type="email" class="form-control" required placeholder="Votre email"/>
+            <!-- sujet du message -->
+            <label for="subject" class="my-0">Sujet:</label>
+            <small ng-show="contact.subject.$invalid && !contact.subject.$pristine" class="position-absolute ml-1 alert-danger" role="alert"><strong>Attention!</strong> Le sujet doit comporter entre 4 et 50 caractères.</small>
+            <input id="subject" name="subject" ng-model="userSubject" ng-pattern="/^.{4,50}$/" type="text" class="form-control" required placeholder="Sujet de votre demande"/>
+            <!-- message -->
+            <label for="message" class="my-0">Votre message:</label>
+            <small ng-show="contact.message.$invalid && !contact.message.$pristine" class="position-absolute ml-1 alert-danger" role="alert"><strong>Attention!</strong> Entre 20 et 400 caractères.</small>
+            <textarea id="message" name="message" ng-model="userMessage" ng-pattern="/^.{20,400}$/" rows="8" class="form-control" required style="resize:none;" placeholder="Votre message"></textarea>
+            <!-- bouton de validation -->
+            <button type="button" name="submit" class="btn btn-primary mt-2" ng-click="formSubmit(contact.$valid)">Envoyer</button>
+        </form>
+    </section>
+    <section class="w-50">
+        <p class="lead text-center"><i class="far fa-envelope mx-2"></i>Messages :</p>
+        <hr class="w-50">
+        <!-- je parcours le tableau SubjectList et je créé un lien pour chaque entrée -->
+        <p class="text-center" ng-repeat="usersubject in userSubjectList" >
+            <!-- dans le lien, le $index correspond à où nous en sommes dans le ng-repeat -->
+            <a href="#!/message/{{$index}}">Sujet: {{usersubject}}</a>
+        </p>
+    </section>
+</div>

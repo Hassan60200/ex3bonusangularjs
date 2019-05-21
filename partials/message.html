@@ -1,0 +1,13 @@
+<!-- page message : affiche le contenu du message ouvert -->
+<div ng-controller="messageController" class="text-center">
+    <p><a href="#!"><small>retour au formulaire</small></a></p>
+    <p class="my-0 lead">Message de :</p>
+    <p class="my-0 mx-2">{{ userName }}</p>
+    <p class="my-0 mx-2">{{ userMail }}</p>
+    <hr class="w-50 my-1">
+    <p class="my-0 lead">Sujet:</p>
+    <p class="my-0 mx-2">{{ userSubject }}</p>
+    <hr class="w-50 my-1">
+    <p class="my-0 lead">Message:</p>
+    <p class="my-0 mx-2">{{ userMessage }}</p>
+</div>
